@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canton Forge — Canton Network Consultancy</title>
+    <meta name="description" content="Expert Canton Network consultancy. Smart contract development, auditing, integration, and testing services to bring your business onto the Canton Network.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #0f0f1a;
+            --bg-card: #141422;
+            --bg-card-hover: #1a1a2e;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --accent-glow-strong: rgba(99, 102, 241, 0.3);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #1e1e3a;
+            --border-light: #2a2a4a;
+            --gradient-start: #6366f1;
+            --gradient-end: #8b5cf6;
+            --success: #10b981;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 10, 15, 0.8);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+        .nav-logo span {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+        .nav-cta {
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        .nav-cta:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Mobile nav */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ============================================
+           HERO
+           ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background effects */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, var(--accent-glow) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+            animation: aurora 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes aurora {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-2%, 2%) rotate(1deg); }
+            100% { transform: translate(2%, -1%) rotate(-1deg); }
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.3;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            border: 1px solid var(--border-light);
+            background: var(--bg-card);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end), #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: #fff;
+            box-shadow: 0 4px 24px var(--accent-glow-strong);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px var(--accent-glow-strong);
+            color: #fff;
+        }
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-light);
+        }
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           SECTIONS COMMON
+           ============================================ */
+        section {
+            padding: 6rem 2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-light);
+            margin-bottom: 1rem;
+        }
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 2px;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+        .section-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           TRUSTED BY / LOGOS BAR
+           ============================================ */
+        .trusted {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+            background: var(--bg-secondary);
+        }
+        .trusted p {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        .trusted-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            opacity: 0.4;
+        }
+        .trusted-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+        }
+
+        /* ============================================
+           SERVICES
+           ============================================ */
+        .services {
+            background: var(--bg-secondary);
+        }
+        .services-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .services-header .section-desc {
+            margin: 0 auto;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gradient-start), var(--gradient-end), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .service-card:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+        }
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.5rem;
+        }
+        .service-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           WHY CANTON
+           ============================================ */
+        .why-canton {
+            position: relative;
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+        .why-visual {
+            position: relative;
+            padding: 2rem;
+        }
+        .why-diagram {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            font-family: 'Inter', monospace;
+        }
+        .why-diagram-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+        }
+        .why-diagram-row + .why-diagram-row {
+            border-top: 1px solid var(--border);
+        }
+        .why-diagram-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-privacy { background: var(--accent); }
+        .dot-scale { background: #10b981; }
+        .dot-interop { background: #f59e0b; }
+        .dot-compliance { background: #ec4899; }
+        .why-diagram-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            flex: 1;
+        }
+        .why-diagram-value {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .why-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .why-feature {
+            display: flex;
+            gap: 1rem;
+        }
+        .why-feature-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-light);
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .why-feature h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .why-feature p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           PROCESS
+           ============================================ */
+        .process {
+            background: var(--bg-secondary);
+        }
+        .process-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .process-header .section-desc {
+            margin: 0 auto;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--border), var(--accent), var(--border));
+            opacity: 0.4;
+        }
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+        .process-num {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 2px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-light);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+        .process-step:hover .process-num {
+            border-color: var(--accent);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+        .process-step h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .process-step p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           STATS
+           ============================================ */
+        .stats {
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, var(--bg-secondary), var(--bg-primary));
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+        .stat-num {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* ============================================
+           ABOUT / TEAM
+           ============================================ */
+        .about {
+            background: var(--bg-secondary);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+        .about-text h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .about-text p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+        .about-highlights {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .about-highlight {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .about-highlight:hover {
+            border-color: var(--border-light);
+            background: var(--bg-card-hover);
+        }
+        .about-highlight-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-light);
+            margin-bottom: 0.4rem;
+        }
+        .about-highlight-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        /* ============================================
+           TESTIMONIAL
+           ============================================ */
+        .testimonial {
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+        .testimonial-quote {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: var(--text-primary);
+            font-style: italic;
+        }
+        .testimonial-quote::before {
+            content: '\201C';
+            font-size: 4rem;
+            line-height: 0;
+            vertical-align: -1.5rem;
+            color: var(--accent);
+            margin-right: 0.25rem;
+        }
+        .testimonial-author {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .testimonial-author strong {
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           CTA
+           ============================================ */
+        .cta {
+            padding: 6rem 2rem;
+        }
+        .cta-box {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gradient-start), var(--gradient-end), transparent);
+        }
+        .cta-box::after {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .cta-box h2 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .cta-box p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        .cta-box .btn {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg-secondary);
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .footer-copy {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .footer-links a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .process-steps::before {
+                display: none;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .nav-toggle {
+                display: block;
+            }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                border-bottom: 1px solid var(--border);
+                padding: 1rem 2rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            .cta-box {
+                padding: 2.5rem 1.5rem;
+            }
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 4rem 1.25rem;
+            }
+            .hero {
+                padding: 7rem 1.25rem 3rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
+           ANIMATIONS (scroll reveal)
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== NAV ====== -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <div class="nav-logo">Canton<span>Forge</span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#why-canton">Why Canton</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="btn nav-cta">Get Started</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+        </div>
+    </nav>
+
+    <!-- ====== HERO ====== -->
+    <section class="hero" id="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Canton Network Experts
+            </div>
+            <h1>
+                Build on Canton.<br>
+                <span class="gradient">Scale with Confidence.</span>
+            </h1>
+            <p class="hero-sub">
+                We help companies integrate, build, and launch on the Canton Network.
+                From smart contract development to security audits &mdash; we turn your vision into production-ready reality.
+            </p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary">Start Your Project &rarr;</a>
+                <a href="#services" class="btn btn-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== SERVICES ====== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="services-header reveal">
+                <div class="section-label">What We Do</div>
+                <h2 class="section-title">End-to-End Canton Services</h2>
+                <p class="section-desc">
+                    From initial architecture to production deployment, we cover every stage of your Canton journey.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">&#9998;</div>
+                    <h3>Smart Contract Development</h3>
+                    <p>
+                        We write production-grade Daml smart contracts tailored to your business logic.
+                        From tokenization to settlement workflows, we deliver contracts that are secure, efficient, and ready for mainnet.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">&#128270;</div>
+                    <h3>Smart Contract Auditing</h3>
+                    <p>
+                        Already have contracts? Our deep Canton expertise lets us identify vulnerabilities,
+                        logic errors, and optimization opportunities. Get a comprehensive audit report with actionable fixes.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">&#9989;</div>
+                    <h3>Testing &amp; QA</h3>
+                    <p>
+                        Rigorous testing across unit, integration, and end-to-end scenarios.
+                        We build comprehensive test suites that catch issues before they reach production, saving you time and money.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">&#128279;</div>
+                    <h3>Canton Integration</h3>
+                    <p>
+                        Connect your existing systems to the Canton Network. We handle Ledger API integration,
+                        participant node setup, and synchronizer configuration to get you operational fast.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">&#128640;</div>
+                    <h3>Architecture &amp; Strategy</h3>
+                    <p>
+                        Not sure where to start? We design your Canton architecture from the ground up &mdash;
+                        data models, workflows, privacy topology, and deployment strategy tailored to your business.
+                    </p>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">&#128218;</div>
+                    <h3>Training &amp; Support</h3>
+                    <p>
+                        Upskill your engineering team with hands-on Daml and Canton training.
+                        From workshops to ongoing support, we ensure your team can maintain and evolve your platform independently.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== WHY CANTON ====== -->
+    <section class="why-canton" id="why-canton">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">Why Canton</div>
+                <h2 class="section-title">The Network Built for<br>Regulated Industries</h2>
+                <p class="section-desc">
+                    Canton is the only blockchain network designed from day one for privacy,
+                    compliance, and enterprise-grade performance.
+                </p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-visual reveal">
+                    <div class="why-diagram">
+                        <div class="why-diagram-row">
+                            <span class="why-diagram-dot dot-privacy"></span>
+                            <span class="why-diagram-label">Privacy by Design</span>
+                            <span class="why-diagram-value">Sub-transaction</span>
+                        </div>
+                        <div class="why-diagram-row">
+                            <span class="why-diagram-dot dot-scale"></span>
+                            <span class="why-diagram-label">Throughput</span>
+                            <span class="why-diagram-value">Enterprise Scale</span>
+                        </div>
+                        <div class="why-diagram-row">
+                            <span class="why-diagram-dot dot-interop"></span>
+                            <span class="why-diagram-label">Interoperability</span>
+                            <span class="why-diagram-value">Cross-network</span>
+                        </div>
+                        <div class="why-diagram-row">
+                            <span class="why-diagram-dot dot-compliance"></span>
+                            <span class="why-diagram-label">Regulatory Compliance</span>
+                            <span class="why-diagram-value">Built-in</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="why-features reveal">
+                    <div class="why-feature">
+                        <div class="why-feature-icon">P</div>
+                        <div>
+                            <h4>True Privacy</h4>
+                            <p>Participants only see the data they're entitled to. No global state broadcast &mdash; Canton enforces privacy at the protocol level.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-feature-icon">S</div>
+                        <div>
+                            <h4>Horizontal Scalability</h4>
+                            <p>Add synchronizers to scale independently. No single bottleneck &mdash; performance grows with your business needs.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-feature-icon">I</div>
+                        <div>
+                            <h4>Interoperability</h4>
+                            <p>Seamlessly transact across different synchronizers and networks. Atomic operations span organizational boundaries.</p>
+                        </div>
+                    </div>
+                    <div class="why-feature">
+                        <div class="why-feature-icon">C</div>
+                        <div>
+                            <h4>Regulatory Ready</h4>
+                            <p>Designed for financial services and regulated markets. Built-in compliance primitives satisfy regulatory requirements.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== PROCESS ====== -->
+    <section class="process" id="process">
+        <div class="container">
+            <div class="process-header reveal">
+                <div class="section-label">How We Work</div>
+                <h2 class="section-title">From Idea to Mainnet</h2>
+                <p class="section-desc">
+                    A proven process that takes your project from concept to production on the Canton Network.
+                </p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step reveal">
+                    <div class="process-num">1</div>
+                    <h3>Discovery</h3>
+                    <p>We learn your business, identify use cases, and define the scope of your Canton integration.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-num">2</div>
+                    <h3>Design</h3>
+                    <p>We architect your data model, workflows, and privacy topology. You approve before we write a line of code.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-num">3</div>
+                    <h3>Build &amp; Test</h3>
+                    <p>Iterative development with continuous testing. Regular demos keep you in the loop at every stage.</p>
+                </div>
+                <div class="process-step reveal">
+                    <div class="process-num">4</div>
+                    <h3>Deploy</h3>
+                    <p>Production deployment, monitoring setup, and knowledge transfer. We stay on for support as long as you need.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ABOUT ====== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="reveal">
+                <div class="section-label">Who We Are</div>
+                <h2 class="section-title">Small Team. Deep Expertise.</h2>
+                <p class="section-desc">
+                    We've been building on Canton since its earliest days &mdash; long before it went mainstream.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <h3>Early Adopters, Battle-Tested</h3>
+                    <p>
+                        We're a small, focused team of engineers who got into Canton when the ecosystem was still young.
+                        We didn't just read the docs &mdash; we built real products on the network, hit every edge case,
+                        debugged the hard problems, and shipped to production.
+                    </p>
+                    <p>
+                        That hands-on experience with real-world Canton projects is what sets us apart.
+                        We know what works, what breaks, and how to get from idea to mainnet without the detours.
+                        When you work with us, you're getting years of Canton-specific knowledge compressed into your timeline.
+                    </p>
+                    <p>
+                        We keep the team small on purpose. No layers of management, no generalists learning on your dime.
+                        Every person on your project has shipped Canton code to production.
+                    </p>
+                </div>
+
+                <div class="about-highlights reveal">
+                    <div class="about-highlight">
+                        <div class="about-highlight-label">Experience</div>
+                        <div class="about-highlight-text">Building on Canton since the early days of the network &mdash; among the first independent teams to ship production Daml applications.</div>
+                    </div>
+                    <div class="about-highlight">
+                        <div class="about-highlight-label">Real Projects</div>
+                        <div class="about-highlight-text">Tokenization platforms, settlement systems, and custom financial instruments &mdash; all live on Canton mainnet.</div>
+                    </div>
+                    <div class="about-highlight">
+                        <div class="about-highlight-label">Full Stack</div>
+                        <div class="about-highlight-text">From Daml smart contracts to Ledger API integrations, participant node operations, and end-to-end testing &mdash; we cover the entire stack.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== CTA ====== -->
+    <section class="cta" id="contact">
+        <div class="cta-box reveal">
+            <h2>Ready to Build on Canton?</h2>
+            <p>
+                Let's discuss your project. Whether you need a full integration, a smart contract audit,
+                or just a strategy session &mdash; we're here to help.
+            </p>
+            <a href="mailto:hello@cantonforge.com" class="btn btn-primary">Get in Touch &rarr;</a>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-copy">&copy; 2026 Canton Forge. All rights reserved.</div>
+            <ul class="footer-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="mailto:hello@cantonforge.com">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script>
+        // Mobile nav toggle
+        document.getElementById('navToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        reveals.forEach(el => observer.observe(el));
+
+        // Nav background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(10, 10, 15, 0.95)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 15, 0.8)';
+            }
+        });
+
+        // Close mobile nav on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
